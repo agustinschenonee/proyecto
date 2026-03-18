@@ -10,7 +10,7 @@ Nombre del proyecto: Sistema de reservas para espacio de coworking
 | Nicolás Aguilera    | UX Lead               | @nicolasaguilera7914@gmail.com|
 
 Descripción del proyecto:
-Sistema integral de gestión de coworking orientado a la optimización de espacios físicos, que centraliza la reserva de salas y escritorios mediante un motor de disponibilidad en tiempo real.
+Sistema de gestión de coworking orientado a la optimización de espacios físicos, que centraliza la reserva de salas y escritorios mediante un motor de disponibilidad en tiempo real.
 
 Link al tablero kanvan:
 Link al último reporte semanal:
