@@ -4,4 +4,4 @@
 | Priscila Galeano    | Dev Lead              | @priiscigaleano@gmail.com    |
 | Valentina Carabajal | Dev Lead & QA Lead    | @vcarabajal94@gmail.com      |
 | Luciano Grasiozetti | QA Lead               | @lucianograsiozetti@gmail.com|
-| Nicolás Aguilera    | UX Lead               | @jose-p                      |
+| Nicolás Aguilera    | UX Lead               | @nicolasaguilera7914@gmail.com|
