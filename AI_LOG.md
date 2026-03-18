@@ -1,5 +1,5 @@
 # AI_LOG.md — Registro de uso de herramientas de IA
-**Grupo:** [Nombre del grupo]
+**Grupo:** Dev Papois
 **Proyecto:** [Nombre del sistema]
 **Materia:** Ingeniería de Software II · UCP · 2026
 
