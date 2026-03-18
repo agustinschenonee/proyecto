@@ -12,5 +12,6 @@ Nombre del proyecto: Sistema de reservas para espacio de coworking
 Descripción del proyecto:
 Sistema de gestión de coworking orientado a la optimización de espacios físicos, que centraliza la reserva de salas y escritorios mediante un motor de disponibilidad en tiempo real.
 
-Link al tablero kanvan:
-Link al último reporte semanal:
+Links:
+● Tablero Kanvan:
+● Reporte Semanal:
