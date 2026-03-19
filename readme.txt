@@ -13,5 +13,5 @@ Descripción del proyecto:
 Sistema de gestión de coworking orientado a la optimización de espacios físicos, que centraliza la reserva de salas y escritorios mediante un motor de disponibilidad en tiempo real.
 
 Links:
-● Tablero Kanvan:
+● Tablero Kanvan: https://github.com/users/agustinschenonee/projects/1/views/1 
 ● Reporte Semanal:
