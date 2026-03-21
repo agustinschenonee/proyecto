@@ -2,7 +2,7 @@ Nombre del grupo: DEVpapois
 Nombre del proyecto: Sistema de reservas para espacio de coworking
 
 | Nombre              | Rol                   | GitHub                        |
-|------------------   |-----------------------|------------------------------ |
+|---------------------|-----------------------|-------------------------------|
 | Agustin Schenone    | Scrum Master          | @agustinschenone@outlook.com  |
 | Priscila Galeano    | Dev Lead              | @priiscigaleano@gmail.com     |
 | Valentina Carabajal | Dev Lead & QA Lead    | @vcarabajal94@gmail.com       |
