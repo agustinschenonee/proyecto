@@ -44,7 +44,7 @@ El archivo se revisa en el coloquio del TP1, TP2 e Integrador. Cualquier integra
 
 ---
 
-## Ejemplos completos
+## Entradas
 
 ---
 
