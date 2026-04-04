@@ -74,6 +74,7 @@ Una propuesta de redacción para las cuatro secciones del Contrato de Proyecto b
 Instrucciones paso a paso para la creación de etiquetas (Labels) y la visibilidad de campos en GitHub Projects.
 
 **¿Qué aceptamos tal cual?**
+
 Nada
 
 **¿Qué modificamos y por qué?**
