@@ -27,3 +27,4 @@
     const emailAlert = new NotificadorEmail();
     emailAlert.actualizar(`El recurso "${miSala.nombre}" ha sido registrado.`);
     ```
+
