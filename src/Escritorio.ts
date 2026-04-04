@@ -1,14 +1,19 @@
-// src/modules/resources/Escritorio.ts
 import { Recurso } from './Recurso';
 
+// 1. Cambiamos el nombre de la clase a Escritorio
 export class Escritorio implements Recurso {
     constructor(
-        public id: string,
         public nombre: string,
-        public capacidad: number = 1 // Por defecto 1 persona
+        public capacidad: number,
+        public disponible: boolean = true,
+        // 2. El tipo por defecto ahora es 'ESCRITORIO'
+        public tipo: string = 'ESCRITORIO', 
+        public imagen_url?: string,
+        public id?: number
     ) {}
 
     obtenerDetalles(): string {
-        return `Escritorio: ${this.nombre} | Capacidad: ${this.capacidad} persona`;
+        // 3. Cambiamos el texto para que diga ESCRITORIO
+        return `ESCRITORIO: ${this.nombre} | Capacidad: ${this.capacidad} | Puesto: ${this.id || 'S/N'}`;
     }
 }
