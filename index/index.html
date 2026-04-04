@@ -2,87 +2,160 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>UCP - Reserva de Espacios</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UCP | Reservas Dinámicas</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px; background: #f0f2f5; color: #333; }
-        h1 { color: #1f2937; border-bottom: 2px solid #3ecf8e; padding-bottom: 10px; }
-        #recursos-lista { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 20px; }
-        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 280px; border: 1px solid #e5e7eb; }
-        .card h3 { margin-top: 0; color: #111827; }
-        button { background: #3ecf8e; color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; width: 100%; font-weight: bold; transition: background 0.3s; }
-        button:hover { background: #2eb87a; }
-        .status { font-weight: bold; padding: 4px 8px; border-radius: 4px; font-size: 0.9em; }
-        .disponible { background: #dcfce7; color: #166534; }
-        .reservada { background: #fee2e2; color: #991b1b; }
+        :root { --primary: #004a99; --secondary: #3ecf8e; --bg: #f1f5f9; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); color: #334155; }
+        header { background: var(--primary); color: white; padding: 1.5rem 5%; font-weight: bold; font-size: 1.4rem; }
+        .container { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+        
+        .form-card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #64748b; }
+        select, input { width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; box-sizing: border-box; font-size: 1rem; }
+        
+        button { background: var(--secondary); color: white; border: none; padding: 15px; border-radius: 8px; width: 100%; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #2eb87a; transform: translateY(-2px); }
+
+        .reserva-item { background: white; margin-top: 10px; padding: 15px; border-radius: 10px; border-left: 5px solid var(--primary); display: flex; justify-content: space-between; align-items: center; }
     </style>
 </head>
 <body>
-    <h1>🏢 Sistema de Reservas UCP</h1>
-    <div id="recursos-lista">
-        <p id="mensaje-estado">⏳ Conectando con la base de datos...</p>
+
+<header>🏫 Sistema de Reservas UCP</header>
+
+<div class="container">
+    <div class="form-card">
+        <h2 style="margin-top:0; color: var(--primary);">Nueva Reserva</h2>
+        
+        <div class="form-group">
+            <label>👤 ¿Quién reserva?</label>
+            <select id="select-usuario"><option>Cargando...</option></select>
+        </div>
+
+        <div class="form-group">
+            <label>📍 Seleccioná el Espacio</label>
+            <select id="select-recurso" onchange="verificarCapacidad()"><option>Cargando...</option></select>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group">
+                <label>📅 Fecha</label>
+                <input type="date" id="input-fecha">
+            </div>
+            <div class="form-group">
+                <label>⏰ Hora de asistencia</label>
+                <input type="time" id="input-hora">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>👥 Cantidad de personas (Capacidad máx: <span id="cap-max">--</span>)</label>
+            <input type="number" id="input-personas" min="1" value="1">
+        </div>
+
+        <button onclick="crearReserva()">Confirmar y Agendar Turno</button>
     </div>
 
-    <script>
-        // 1. Configuración (Tus llaves reales)
-        const SUPABASE_URL = 'https://wybiblrhcphwuhrmgkhv.supabase.co';
-        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5YmlibHJoY3Bod3Vocm1na2h2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQwOTYxOTUsImV4cCI6MjA4OTY3MjE5NX0.qiBG-FqFhI8IaRqlTT-qb10qHQ2SEJrnZ_Djh49VvyA';
+    <h3 style="margin-top: 2rem;">📋 Reservas del día</h3>
+    <div id="lista-reservas"></div>
+</div>
+
+<script>
+    const URL_SB = 'https://wybiblrhcphwuhrmgkhv.supabase.co';
+    const KEY_SB = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5YmlibHJoY3Bod3Vocm1na2h2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQwOTYxOTUsImV4cCI6MjA4OTY3MjE5NX0.qiBG-FqFhI8IaRqlTT-qb10qHQ2SEJrnZ_Djh49VvyA';
+    const client = supabase.createClient(URL_SB, KEY_SB);
+
+    let salas = [];
+
+    async function inicializar() {
+        // Cargar Usuarios
+        const { data: users } = await client.from('usuarios').select('id, nombre').order('nombre');
+        const selUser = document.getElementById('select-usuario');
+        selUser.innerHTML = '<option value="">-- Seleccioná tu nombre --</option>';
+        users.forEach(u => selUser.innerHTML += `<option value="${u.id}">${u.nombre}</option>`);
+
+        // Cargar Salas
+        const { data: recs } = await client.from('recursos').select('*');
+        salas = recs;
+        const selRec = document.getElementById('select-recurso');
+        selRec.innerHTML = '<option value="">-- ¿Qué espacio necesitás? --</option>';
+        recs.forEach(r => selRec.innerHTML += `<option value="${r.id}">${r.nombre} (${r.tipo})</option>`);
         
-        // CAMBIO CLAVE: Cambiamos el nombre de la variable a 'client' para no chocar con la librería
-        const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        document.getElementById('input-fecha').valueAsDate = new Date();
+        actualizarLista();
+    }
 
-        async function cargarSalas() {
-            const mensaje = document.getElementById('mensaje-estado');
-            try {
-                // Pedimos los datos a Supabase
-                const { data: recursos, error } = await client.from('recursos').select('*');
-                
-                if (error) throw error;
+    function verificarCapacidad() {
+        const idSala = document.getElementById('select-recurso').value;
+        const sala = salas.find(s => s.id == idSala);
+        if (sala) {
+            document.getElementById('cap-max').innerText = sala.capacidad_maxima;
+            document.getElementById('input-personas').max = sala.capacidad_maxima;
+        }
+    }
 
-                const lista = document.getElementById('recursos-lista');
-                lista.innerHTML = ''; // Limpiamos el "Cargando..."
+    async function crearReserva() {
+        const res = {
+            usuario_id: document.getElementById('select-usuario').value,
+            recurso_id: document.getElementById('select-recurso').value,
+            fecha: document.getElementById('input-fecha').value,
+            hora_inicio: document.getElementById('input-hora').value,
+            cantidad_personas: document.getElementById('input-personas').value,
+            esta_reservado: true,
+            confirmado: true
+        };
 
-                if (recursos.length === 0) {
-                    lista.innerHTML = '<p>No hay recursos cargados en la base de datos.</p>';
-                    return;
-                }
-
-                recursos.forEach(res => {
-                    lista.innerHTML += `
-                        <div class="card">
-                            <h3>${res.nombre}</h3>
-                            <p>👥 Capacidad: ${res.capacidad}</p>
-                            <p>📍 Tipo: ${res.tipo}</p>
-                            <p>Estado: <span class="status ${res.disponible ? 'disponible' : 'reservada'}">
-                                ${res.disponible ? '✅ Disponible' : '❌ Reservada'}
-                            </span></p>
-                            ${res.disponible 
-                                ? `<button onclick="reservar(${res.id})">Reservar Ahora</button>` 
-                                : '<p style="text-align:center; color: #667">No disponible</p>'}
-                        </div>`;
-                });
-            } catch (err) {
-                console.error("Fallo la conexión:", err);
-                mensaje.innerHTML = "❌ Error de conexión: " + err.message;
-            }
+        if (!res.usuario_id || !res.recurso_id || !res.hora_inicio) {
+            alert("⚠️ Por favor, completá todos los campos.");
+            return;
         }
 
-        async function reservar(id) {
-            const { error } = await client
-                .from('recursos')
-                .update({ disponible: false })
-                .eq('id', id);
-            
-            if (error) {
-                alert("Error al reservar: " + error.message);
-            } else {
-                alert("¡Reserva confirmada con éxito! 🎉");
-                cargarSalas(); // Recargamos para ver el cambio
-            }
+        // Validación de capacidad
+        const sala = salas.find(s => s.id == res.recurso_id);
+        if (parseInt(res.cantidad_personas) > sala.capacidad_maxima) {
+            alert(`❌ La capacidad máxima de esta sala es de ${sala.capacidad_maxima} personas.`);
+            return;
         }
 
-        // Iniciamos la carga
-        cargarSalas();
-    </script>
+        const { error } = await client.from('turnos').insert([res]);
+
+        if (error) {
+            alert("Error: " + error.message);
+        } else {
+            alert("✅ ¡Reserva agendada con éxito!");
+            actualizarLista();
+        }
+    }
+
+    async function actualizarLista() {
+        const fecha = document.getElementById('input-fecha').value;
+        const { data } = await client
+            .from('turnos')
+            .select('hora_inicio, cantidad_personas, recursos(nombre), usuarios(nombre)')
+            .eq('fecha', fecha)
+            .order('hora_inicio');
+
+        const lista = document.getElementById('lista-reservas');
+        lista.innerHTML = '';
+        if (data.length === 0) lista.innerHTML = '<p>No hay reservas para hoy.</p>';
+        
+        data.forEach(r => {
+            lista.innerHTML += `
+                <div class="reserva-item">
+                    <div>
+                        <strong>${r.hora_inicio.slice(0,5)} hs</strong> - ${r.recursos.nombre}<br>
+                        <small>👤 Reservado por: ${r.usuarios.nombre}</small>
+                    </div>
+                    <div style="font-weight: bold; color: var(--primary);">👥 ${r.cantidad_personas} pers.</div>
+                </div>
+            `;
+        });
+    }
+
+    inicializar();
+</script>
 </body>
 </html>
