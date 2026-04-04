@@ -1,11 +1,11 @@
-import { RecursoFactory } from './RecursoFactory';
-import { NotificadorEmail } from './Notificadores';
-import { supabase } from './supabase';
+import { RecursoFactory } from './RecursoFactory.ts';
+import { NotificadorEmail } from './Notificadores.ts';
+import { supabase } from './supabase.ts';
 
+// 1. Definimos la función
 async function registrarEspacio() {
-    console.log("--- 🏢 CASO DE USO: REGISTRAR RECURSO EN NUBE ---");
+    console.log("--- 🏢 INICIANDO CASO DE USO ---");
 
-    // 1. Datos (Incluimos mantenimiento para cumplir con la base de datos)
     const datos = {
         nombre: "Sala de Conferencias Posadas",
         capacidad: 20,
@@ -14,34 +14,36 @@ async function registrarEspacio() {
         mantenimiento: "2026-06-15" 
     };
 
-    // 2. Uso del patrón FACTORY
-    const miRecurso = RecursoFactory.crearRecurso(datos.tipo, datos);
-    console.log(`> Objeto '${miRecurso.nombre}' generado localmente.`);
+    try {
+        const miRecurso = RecursoFactory.crearRecurso(datos.tipo, datos);
+        console.log(`> Objeto '${miRecurso.nombre}' generado localmente.`);
 
-    // 3. Persistencia Real en Supabase (Punta a Punta)
-    console.log("> Conectando con la base de datos remota...");
-    const { error } = await supabase
-        .from('recursos')
-        .insert([
-            { 
-                nombre: miRecurso.nombre, 
-                capacidad: miRecurso.capacidad, 
-                tipo: datos.tipo,
-                disponible: miRecurso.disponible,
-                mantenimiento: datos.mantenimiento 
-            }
-        ]);
+        console.log("> Conectando con Supabase...");
+        const { error } = await supabase
+            .from('recursos')
+            .insert([
+                { 
+                    nombre: miRecurso.nombre, 
+                    capacidad: miRecurso.capacidad, 
+                    tipo: datos.tipo,
+                    disponible: miRecurso.disponible,
+                    mantenimiento: datos.mantenimiento 
+                }
+            ]);
 
-    if (error) {
-        console.error("❌ Error al guardar en Supabase:", error.message);
-        return;
+        if (error) {
+            console.error("❌ Error en base de datos:", error.message);
+            return;
+        }
+
+        const notificador = new NotificadorEmail();
+        notificador.actualizar(`El recurso "${miRecurso.nombre}" se registró correctamente.`);
+        console.log("--- ✅ PROCESO FINALIZADO CON ÉXITO ---");
+
+    } catch (err) {
+        console.error("❌ Error inesperado:", err);
     }
-
-    // 4. Uso del patrón OBSERVER
-    const notificador = new NotificadorEmail();
-    notificador.actualizar(`El recurso "${miRecurso.nombre}" se registró correctamente en la nube.`);
-
-    console.log("--- ✅ PROCESO FINALIZADO CON ÉXITO ---");
 }
 
+// 2. ¡LLAMAMOS A LA FUNCIÓN PARA QUE ARRANQUE!
 registrarEspacio();
