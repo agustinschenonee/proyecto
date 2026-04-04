@@ -1,5 +1,3 @@
-import { RecursoFactory } from './RecursoFactory';
-import { NotificadorEmail } from './Notificadores';
 import { RecursoFactory } from './RecursoFactory.ts'; // Agregamos .ts
 import { NotificadorEmail } from './Notificadores.ts'; // Agregamos .ts
 
