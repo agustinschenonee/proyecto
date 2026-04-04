@@ -1,5 +1,5 @@
 export interface Recurso {
-    id?: number; 
+    id?: number;
     nombre: string;
     capacidad: number;
     tipo: string;
