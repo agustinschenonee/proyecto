@@ -1,5 +1,7 @@
 import { RecursoFactory } from './RecursoFactory';
 import { NotificadorEmail } from './Notificadores';
+import { RecursoFactory } from './RecursoFactory.ts'; // Agregamos .ts
+import { NotificadorEmail } from './Notificadores.ts'; // Agregamos .ts
 
 console.log("--- SISTEMA DE COWORKING DEVpapois ---");
 
@@ -18,4 +20,5 @@ console.log(miSala.obtenerDetalles());
 const emailAlert = new NotificadorEmail();
 emailAlert.actualizar(`La ${miSala.nombre} ya está cargada en el sistema.`);
 
+console.log("--- PRUEBA FINALIZADA ---");
 console.log("--- PRUEBA FINALIZADA ---");
