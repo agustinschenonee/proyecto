@@ -87,5 +87,20 @@ Se verificó que el contenido del contrato reflejara fielmente los acuerdos inte
 **¿Qué descartamos y por qué?**
 Nada
 ---
+# Registro de Uso de IA 
 
+**Herramienta utilizada:** Gemini (Google).
+
+### Partes generadas con IA:
+* Estructura base de los patrones Factory y Observer en TypeScript.
+* Configuración inicial de interfaces y moldes de clases (`Recurso`, `Sala`, `Escritorio`).
+* Scripts de resolución de errores de entorno (políticas de ejecución de PowerShell y configuración de `tsx`).
+
+### Modificaciones realizadas por el equipo:
+* Adaptación de los campos de las interfaces para que coincidan con la tabla de Supabase (id, imagen_url, mantenimiento).
+* Corrección de rutas de importación y extensiones de archivo (`.ts`) para compatibilidad con Node.js ESM.
+* Personalización de los mensajes de salida en consola para el contexto de DEVpapois.
+
+### Justificación de uso:
+Se utilizó la IA para acelerar la configuración del entorno de desarrollo y generar el código "boilerplate" (repetitivo), permitiendo al equipo enfocarse en la lógica de negocio y en la arquitectura de los patrones de diseño.
 
