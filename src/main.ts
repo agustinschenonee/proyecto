@@ -18,6 +18,5 @@ console.log(miSala.obtenerDetalles());
 const emailAlert = new NotificadorEmail();
 emailAlert.actualizar(`La ${miSala.nombre} ya está cargada en el sistema.`);
 
-console.log("--- PRUEBA FINALIZADA ---");console.log("--- PRUEBA FINALIZADA ---");
 console.log("--- PRUEBA FINALIZADA ---");
 export {};
