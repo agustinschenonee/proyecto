@@ -2,46 +2,44 @@ import { RecursoFactory } from './RecursoFactory';
 import { NotificadorEmail } from './Notificadores';
 import { supabase } from './supabase';
 
-async function ejecutarCasoDeUso() {
-    console.log("--- CASO DE USO: REGISTRAR RECURSO ---");
+async function registrarEspacio() {
+    console.log("--- CASO DE USO: REGISTRAR RECURSO EN NUBE ---");
 
-    // 1. Datos que vienen de la "interfaz" (simulada)
-    const datosEntrada = {
-        nombre: "Sala de Innovación UCP",
-        capacidad: 10,
+    // 1. Datos del nuevo recurso (Simulando entrada de usuario)
+    const datos = {
+        nombre: "Sala de Conferencias Posadas",
+        capacidad: 20,
         disponible: true,
-        tipo: 'SALA',
-        mantenimiento: "2026-06-15"
+        tipo: 'SALA'
     };
 
-    // 2. PATRÓN FACTORY: Creamos el objeto según el tipo
-    const nuevoRecurso = RecursoFactory.crearRecurso(datosEntrada.tipo, datosEntrada);
-    console.log(`> Objeto tipo ${datosEntrada.tipo} creado exitosamente.`);
+    // 2. Uso del patrón FACTORY
+    const miRecurso = RecursoFactory.crearRecurso(datos.tipo, datos);
+    console.log(`> Objeto '${miRecurso.nombre}' generado localmente.`);
 
-    // 3. PERSISTENCIA: Guardamos en Supabase (Punta a Punta)
-    console.log("> Conectando con Supabase para persistir...");
-    const { data, error } = await supabase
-        .from('recursos') 
+    // 3. Persistencia Real en Supabase (Punta a Punta)
+    console.log("> Conectando con la base de datos remota...");
+    const { error } = await supabase
+        .from('recursos')
         .insert([
             { 
-                nombre: nuevoRecurso.nombre, 
-                capacidad: nuevoRecurso.capacidad, 
-                tipo: nuevoRecurso.tipo,
-                disponible: nuevoRecurso.disponible
+                nombre: miRecurso.nombre, 
+                capacidad: miRecurso.capacidad, 
+                tipo: datos.tipo,
+                disponible: miRecurso.disponible 
             }
-        ])
-        .select();
+        ]);
 
     if (error) {
-        console.error("❌ Error en la base de datos:", error.message);
+        console.error("❌ Error al guardar en Supabase:", error.message);
         return;
     }
 
-    // 4. PATRÓN OBSERVER: Notificamos el éxito
-    const emailAlert = new NotificadorEmail();
-    emailAlert.actualizar(`El recurso "${nuevoRecurso.nombre}" ya está guardado en la nube.`);
+    // 4. Uso del patrón OBSERVER
+    const notificador = new NotificadorEmail();
+    notificador.actualizar(`El recurso "${miRecurso.nombre}" se registró correctamente en la nube.`);
 
-    console.log("--- PROCESO FINALIZADO CON ÉXITO ---");
+    console.log("--- ✅ PROCESO FINALIZADO CON ÉXITO ---");
 }
 
-ejecutarCasoDeUso();
+registrarEspacio();
