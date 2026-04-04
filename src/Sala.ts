@@ -5,7 +5,7 @@ export class Sala implements Recurso {
         public nombre: string,
         public capacidad: number,
         public disponible: boolean = true,
-        public tipo: string = 'SALA', // ¡Ojo! Que coincida con la DB
+        public tipo: string = 'SALA',
         public imagen_url?: string,
         public mantenimiento?: string,
         public id?: number
