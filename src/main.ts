@@ -1,7 +1,7 @@
 import { RecursoFactory } from './RecursoFactory';
 import { NotificadorEmail } from './Notificadores';
 
-console.log("--- 🏢 SISTEMA DE COWORKING DEVpapois ---");
+console.log("--- SISTEMA DE COWORKING DEVpapois ---");
 
 // 1. Creamos el recurso usando tu Factory
 const miSala = RecursoFactory.crearRecurso('SALA', {
