@@ -1,26 +1,9 @@
-import { Observador } from './Observador';
-
 export class Turno {
-    private observadores: Observador[] = [];
-
     constructor(
-        public id: string,
+        public id: number,
+        public recursoId: number,
+        public usuario: string,
         public fecha: string,
-        public horario: string,
-        public estado: string = 'pendiente'
+        public estado: string = 'CONFIRMADO'
     ) {}
-
-    // Métodos del patrón Observer
-    agregarObservador(obs: Observador) {
-        this.observadores.push(obs);
-    }
-
-    notificar(mensaje: string) {
-        this.observadores.forEach(obs => obs.actualizar(mensaje));
-    }
-
-    confirmarTurno() {
-        this.estado = 'confirmado';
-        this.notificar(`¡Turno ${this.id} CONFIRMADO para el ${this.fecha} a las ${this.horario}!`);
-    }
 }
