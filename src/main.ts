@@ -3,7 +3,7 @@ import { NotificadorEmail } from './Notificadores';
 
 console.log("--- SISTEMA DE COWORKING DEVpapois ---");
 
-// 1. Creamos el recurso usando tu Factory
+// 1. Creamos una sala usando la Factory
 const miSala = RecursoFactory.crearRecurso('SALA', {
     nombre: "Sala Principal Iguazú",
     capacidad: 12,
@@ -11,9 +11,11 @@ const miSala = RecursoFactory.crearRecurso('SALA', {
     mantenimiento: "2026-05-15"
 });
 
-// 2. Probamos que el objeto se creó bien
+// 2. Mostramos los detalles en consola
 console.log(miSala.obtenerDetalles());
 
-// 3. (Opcional) Mostramos que el Observer está listo para avisar
+// 3. Probamos el sistema de notificaciones (Observer)
 const emailAlert = new NotificadorEmail();
-emailAlert.actualizar(`La ${miSala.nombre} ya está cargada en el sistema.`);
+emailAlert.actualizar(`El recurso "${miSala.nombre}" ha sido registrado con éxito.`);
+
+console.log("--- PRUEBA FINALIZADA ---");
