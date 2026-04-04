@@ -1,38 +1,49 @@
-async function registrarEspacio() {
-    console.log("--- 🏢 CASO DE USO: REGISTRAR RECURSO EN NUBE ---");
+import { RecursoFactory } from './RecursoFactory.ts';
+import { NotificadorEmail } from './Notificadores.ts';
+import { supabase } from './supabase.ts';
 
-    // 1. Datos (Agregamos mantenimiento)
+// 1. Definimos la función
+async function registrarEspacio() {
+    console.log("--- 🏢 INICIANDO CASO DE USO ---");
+
     const datos = {
         nombre: "Sala de Conferencias Posadas",
         capacidad: 20,
         disponible: true,
         tipo: 'SALA',
-        mantenimiento: "05-05-2026" // <-- Agregamos esta línea
+        mantenimiento: "2026-06-15" 
     };
 
-    const miRecurso = RecursoFactory.crearRecurso(datos.tipo, datos);
-    console.log(`> Objeto '${miRecurso.nombre}' generado localmente.`);
+    try {
+        const miRecurso = RecursoFactory.crearRecurso(datos.tipo, datos);
+        console.log(`> Objeto '${miRecurso.nombre}' generado localmente.`);
 
-    console.log("> Conectando con la base de datos remota...");
-    const { error } = await supabase
-        .from('recursos')
-        .insert([
-            { 
-                nombre: miRecurso.nombre, 
-                capacidad: miRecurso.capacidad, 
-                tipo: datos.tipo,
-                disponible: miRecurso.disponible,
-                mantenimiento: datos.mantenimiento // <-- ¡Esta es la clave!
-            }
-        ]);
+        console.log("> Conectando con Supabase...");
+        const { error } = await supabase
+            .from('recursos')
+            .insert([
+                { 
+                    nombre: miRecurso.nombre, 
+                    capacidad: miRecurso.capacidad, 
+                    tipo: datos.tipo,
+                    disponible: miRecurso.disponible,
+                    mantenimiento: datos.mantenimiento 
+                }
+            ]);
 
-    if (error) {
-        console.error("❌ Error al guardar en Supabase:", error.message);
-        return;
+        if (error) {
+            console.error("❌ Error en base de datos:", error.message);
+            return;
+        }
+
+        const notificador = new NotificadorEmail();
+        notificador.actualizar(`El recurso "${miRecurso.nombre}" se registró correctamente.`);
+        console.log("--- ✅ PROCESO FINALIZADO CON ÉXITO ---");
+
+    } catch (err) {
+        console.error("❌ Error inesperado:", err);
     }
-
-    const notificador = new NotificadorEmail();
-    notificador.actualizar(`El recurso "${miRecurso.nombre}" se registró correctamente en la nube.`);
-
-    console.log("--- ✅ PROCESO FINALIZADO CON ÉXITO ---");
 }
+
+// 2. ¡LLAMAMOS A LA FUNCIÓN PARA QUE ARRANQUE!
+registrarEspacio();
