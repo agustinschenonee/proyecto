@@ -1,20 +1,25 @@
 // src/main.ts
 import { RecursoFactory } from './RecursoFactory';
 
-// Probamos crear una Sala
-const salaReunion = RecursoFactory.crearRecurso('SALA', {
-    id: '1',
-    nombre: 'Sala A - Planta Alta',
-    capacidad: 10,
-    fechaMantenimiento: '2026-05-10'
+console.log("--- INICIANDO SISTEMA DE COWORKING ---");
+
+// 1. Usamos la fábrica para crear una Sala (como pediste en tu diagrama)
+const salaPrincipal = RecursoFactory.crearRecurso('SALA', {
+    id: 'S-101',
+    nombre: 'Sala de Conferencias Grande',
+    capacidad: 20,
+    fechaMantenimiento: '2026-04-15'
 });
 
-// Probamos crear un Escritorio
-const escritorioSencillo = RecursoFactory.crearRecurso('ESCRITORIO', {
-    id: '2',
-    nombre: 'Puesto 04',
+// 2. Usamos la misma fábrica para crear un Escritorio
+const escritorio01 = RecursoFactory.crearRecurso('ESCRITORIO', {
+    id: 'E-001',
+    nombre: 'Escritorio Ventana Izquierda',
     capacidad: 1
 });
 
-console.log(salaReunion.obtenerDetalles());
-console.log(escritorioSencillo.obtenerDetalles());
+// 3. Mostramos los resultados en la consola
+console.log(salaPrincipal.obtenerDetalles());
+console.log(escritorio01.obtenerDetalles());
+
+console.log("--- FACTORY FUNCIONANDO CORRECTAMENTE ---");
