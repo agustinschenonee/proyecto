@@ -27,3 +27,5 @@
     const emailAlert = new NotificadorEmail();
     emailAlert.actualizar(`El recurso "${miSala.nombre}" ha sido registrado.`);
     ```
+    ### Persistencia Real:
+Se configuró un cliente de **Supabase** para lograr que el caso de uso sea funcional de "punta a punta", guardando la información en la nube.
