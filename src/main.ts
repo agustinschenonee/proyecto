@@ -49,4 +49,5 @@ async function registrarEspacio() {
 <<<<<<< HEAD
 registrarEspacio();
 =======
+registrarEspacio();
 >>>>>>> 8a3d0cc603d47da200f12c7a28906a38ff9b5062
