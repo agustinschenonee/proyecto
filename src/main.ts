@@ -1,23 +1,47 @@
-import { RecursoFactory } from './RecursoFactory.ts'; // Agregamos .ts
-import { NotificadorEmail } from './Notificadores.ts'; // Agregamos .ts
+import { RecursoFactory } from './RecursoFactory';
+import { NotificadorEmail } from './Notificadores';
+import { supabase } from './supabase';
 
-console.log("--- SISTEMA DE COWORKING DEVpapois ---");
+async function ejecutarCasoDeUso() {
+    console.log("--- CASO DE USO: REGISTRAR RECURSO ---");
 
-// 1. Creamos la sala
-const miSala = RecursoFactory.crearRecurso('SALA', {
-    nombre: "Sala Principal",
-    capacidad: 12,
-    disponible: true,
-    mantenimiento: "2026-05-15"
-});
+    // 1. Datos que vienen de la "interfaz" (simulada)
+    const datosEntrada = {
+        nombre: "Sala de Innovación UCP",
+        capacidad: 10,
+        disponible: true,
+        tipo: 'SALA',
+        mantenimiento: "2026-06-15"
+    };
 
-// 2. Mostramos detalles
-console.log(miSala.obtenerDetalles());
+    // 2. PATRÓN FACTORY: Creamos el objeto según el tipo
+    const nuevoRecurso = RecursoFactory.crearRecurso(datosEntrada.tipo, datosEntrada);
+    console.log(`> Objeto tipo ${datosEntrada.tipo} creado exitosamente.`);
 
-// 3. Probamos el Observer
-const emailAlert = new NotificadorEmail();
-emailAlert.actualizar(`La ${miSala.nombre} ya está cargada en el sistema.`);
+    // 3. PERSISTENCIA: Guardamos en Supabase (Punta a Punta)
+    console.log("> Conectando con Supabase para persistir...");
+    const { data, error } = await supabase
+        .from('recursos') 
+        .insert([
+            { 
+                nombre: nuevoRecurso.nombre, 
+                capacidad: nuevoRecurso.capacidad, 
+                tipo: nuevoRecurso.tipo,
+                disponible: nuevoRecurso.disponible
+            }
+        ])
+        .select();
 
-console.log("--- PRUEBA FINALIZADA ---");
-export {};
+    if (error) {
+        console.error("❌ Error en la base de datos:", error.message);
+        return;
+    }
 
+    // 4. PATRÓN OBSERVER: Notificamos el éxito
+    const emailAlert = new NotificadorEmail();
+    emailAlert.actualizar(`El recurso "${nuevoRecurso.nombre}" ya está guardado en la nube.`);
+
+    console.log("--- PROCESO FINALIZADO CON ÉXITO ---");
+}
+
+ejecutarCasoDeUso();
