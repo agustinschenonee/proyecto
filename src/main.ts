@@ -5,7 +5,7 @@ console.log("--- SISTEMA DE COWORKING DEVpapois ---");
 
 // 1. Creamos la sala
 const miSala = RecursoFactory.crearRecurso('SALA', {
-    nombre: "Sala Principal Iguazú",
+    nombre: "Sala Principal",
     capacidad: 12,
     disponible: true,
     mantenimiento: "2026-05-15"
