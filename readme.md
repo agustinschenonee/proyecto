@@ -20,4 +20,4 @@ Links:
 
 _Observer:_ Lo utilizaremos debido a que le permite al codigo mantenerse actualizado en situaciones donde se necesita una reaccion en tiempo real. El caso de uso por el que lo elegimos es para actualizar la tabla del calendario cuando se realice un cambio en la base de datos de los turnos.
 
-_factory:_ Lo utilizaremos porque nos aporta una flexibilidad al crear y asignar valores a las salas. El caso de uso mas importante es el de la creacion de salas, asignando correctamente la capacidad y el tamaño a la sala.
+_Factory:_ Lo utilizaremos porque nos aporta una flexibilidad al crear y asignar valores a las salas. El caso de uso mas importante es el de la creacion de salas, asignando correctamente la capacidad y el tamaño a la sala.
