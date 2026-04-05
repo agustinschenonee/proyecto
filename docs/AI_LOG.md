@@ -85,8 +85,11 @@ Se validó que el nombre del repositorio respetara el formato estricto de minús
 Se filtró la información sobre permisos de "Solo lectura" en GitHub para adaptarla a las limitaciones reales de las cuentas personales de los alumnos.
 
 Se verificó que el contenido del contrato reflejara fielmente los acuerdos internos de comunicación (WhatsApp/Discord) definidos por el grupo.
+
 **¿Qué descartamos y por qué?**
+
 Nada
+
 ---
 # Registro de Uso de IA 
 
