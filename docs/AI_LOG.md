@@ -50,7 +50,7 @@ El archivo se revisa en el coloquio del TP1, TP2 e Integrador. Cualquier integra
 ## Entradas
 
 ---
-
+```
 ## Entrada 001 — Semana 1
 
 **Fecha:** 19/03/2026
@@ -98,7 +98,7 @@ Se verificó que el contenido del contrato reflejara fielmente los acuerdos inte
 **¿Qué descartamos y por qué?**
 
 Nada
-
+```
 ---
 # Registro de Uso de IA 
 
@@ -116,7 +116,7 @@ Nada
 
 ### Justificación de uso:
 Se utilizó la IA para acelerar la configuración del entorno de desarrollo y generar el código "boilerplate" (repetitivo), permitiendo al equipo enfocarse en la lógica de negocio y en la arquitectura de los patrones de diseño.
-
+```
 ## Entrada 002 — Semana 3
 
 **Fecha:** 02/04/2026
@@ -147,7 +147,8 @@ Se ajustaron algunos tipos de datos propuestos por la IA para alinearlos con las
 **¿Qué descartamos y por qué?**
 
 Se descartaron valores por defecto sugeridos por la IA que no coincidían con el comportamiento esperado del sistema y podían generar datos inconsistentes.
-
+```
+```
 ## Entrada 003 — Semana 3
 
 **Fecha:** 03/04/2026
@@ -179,3 +180,4 @@ Se ajustó la forma en que se reciben los parámetros para que coincidan con el 
 **¿Qué descartamos y por qué?**
 
 Se descartaron ejemplos genéricos de instanciación que no representaban los tipos de espacios definidos en el sistema y podían generar confusión en la implementación.
+```
