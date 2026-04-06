@@ -50,7 +50,7 @@ El archivo se revisa en el coloquio del TP1, TP2 e Integrador. Cualquier integra
 ## Entradas
 
 ---
-```
+
 ## Entrada 001 — Semana 1
 
 **Fecha:** 19/03/2026
@@ -98,7 +98,7 @@ Se verificó que el contenido del contrato reflejara fielmente los acuerdos inte
 **¿Qué descartamos y por qué?**
 
 Nada
-```
+
 ---
 # Registro de Uso de IA 
 
@@ -116,7 +116,7 @@ Nada
 
 ### Justificación de uso:
 Se utilizó la IA para acelerar la configuración del entorno de desarrollo y generar el código "boilerplate" (repetitivo), permitiendo al equipo enfocarse en la lógica de negocio y en la arquitectura de los patrones de diseño.
-```
+
 ## Entrada 002 — Semana 3
 
 **Fecha:** 02/04/2026
@@ -147,8 +147,7 @@ Se ajustaron algunos tipos de datos propuestos por la IA para alinearlos con las
 **¿Qué descartamos y por qué?**
 
 Se descartaron valores por defecto sugeridos por la IA que no coincidían con el comportamiento esperado del sistema y podían generar datos inconsistentes.
-```
-```
+
 ## Entrada 003 — Semana 3
 
 **Fecha:** 03/04/2026
@@ -180,4 +179,34 @@ Se ajustó la forma en que se reciben los parámetros para que coincidan con el 
 **¿Qué descartamos y por qué?**
 
 Se descartaron ejemplos genéricos de instanciación que no representaban los tipos de espacios definidos en el sistema y podían generar confusión en la implementación.
-```
+
+## Entrada 4 — Semana 3
+
+**Fecha:** 03/04/2026
+
+**Herramienta:** ChatGPT
+
+**Responsable:** Dev Lead — [Galeano Priscila, Carabajal Valentina]
+
+**Eje temático:** Eje 1
+
+**¿Para qué se usó?**
+
+Se utilizó la IA para configurar correctamente los permisos de acceso a la base de datos desde el frontend y definir políticas de seguridad adecuadas utilizando Supabase.
+
+**¿Qué generó la IA?**
+
+Ejemplos de implementación de políticas RLS (Row Level Security) y habilitación de permisos de lectura y actualización sobre las tablas del sistema.
+
+**¿Qué aceptamos tal cual?**
+
+La estructura base de las políticas RLS propuestas para restringir el acceso a los datos según el usuario autenticado.
+
+**¿Qué modificamos y por qué?**
+
+Se ajustaron las condiciones de las políticas para que coincidan con los roles y reglas del sistema.
+Se corrigieron manualmente los parámetros de conexión del cliente Supabase debido a errores de URL malformada en el entorno local.
+
+**¿Qué descartamos y por qué?**
+
+Se descartaron configuraciones demasiado permisivas sugeridas por la IA que podían comprometer la seguridad de los datos.
