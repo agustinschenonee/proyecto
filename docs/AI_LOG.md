@@ -1,6 +1,9 @@
 # AI_LOG.md — Registro de uso de herramientas de IA
+
 **Grupo:** Dev Papois
-**Proyecto:** [Nombre del sistema]
+
+**Proyecto:** [Sistema de gestión de coworking]
+
 **Materia:** Ingeniería de Software II · UCP · 2026
 
 ---
@@ -51,8 +54,11 @@ El archivo se revisa en el coloquio del TP1, TP2 e Integrador. Cualquier integra
 ## Entrada 001 — Semana 1
 
 **Fecha:** 19/03/2026
+
 **Herramienta:** Gemini 
+
 **Responsable:** Scrum Master (Agustín Schenone) / QA Lead 
+
 **Eje temático:** Eje 1
 
 **¿Para qué se usó?**
@@ -114,8 +120,11 @@ Se utilizó la IA para acelerar la configuración del entorno de desarrollo y ge
 ## Entrada 002 — Semana 3
 
 **Fecha:** 02/04/2026
+
 **Herramienta:** ChatGPT
+
 **Responsable:** Dev Lead — [Galeano Priscila, Carabajal Valentina]
+
 **Eje temático:** Eje 1
 
 **¿Para qué se usó?**
@@ -142,8 +151,11 @@ Se descartaron valores por defecto sugeridos por la IA que no coincidían con el
 ## Entrada 003 — Semana 3
 
 **Fecha:** 03/04/2026
+
 **Herramienta:** ChatGPT
+
 **Responsable:** Dev Lead — [Galeano Priscila, Carabajal Valentina]
+
 **Eje temático:** Eje 1
 
 **¿Para qué se usó?**
