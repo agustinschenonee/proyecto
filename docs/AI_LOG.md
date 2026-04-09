@@ -241,7 +241,7 @@ Se descartó una sugerencia de la IA de almacenar el rol en el almacenamiento lo
 ## Entrada 006 — Semana 4
 **Fecha: 09/04/2026**
 **Herramienta: Gemini**
-**Responsable: Dev Lead — [Galeano Priscila, Carabajal Valentina]**
+**Responsable: Dev Lead — [Carabajal Valentina, Galeano Priscila]**
 **Eje temático: Eje 2**
 
 **¿Para qué se usó?**
@@ -265,9 +265,9 @@ Se descartó el uso de una tabla temporal para el calendario. Optamos por realiz
 ---
 
 ## Entrada 007 — Semana 4
-Fecha: 09/04/2026
+**Fecha: 09/04/2026
 Herramienta: Gemini
-Responsable: Dev Lead — [Galeano Priscila, Carabajal Valentina]
+Responsable: Dev Lead — [Carabajal Valentina, Galeano Priscila]
 Eje temático: Eje 2**
 
 **¿Para qué se usó?**
