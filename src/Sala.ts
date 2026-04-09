@@ -8,10 +8,11 @@ export class Sala implements Recurso {
         public tipo: string = 'SALA',
         public imagen_url?: string,
         public mantenimiento?: string,
-        public id?: number
+        public id?: number,
+        public horario_disponible?: string // <--- Nuevo
     ) {}
 
     obtenerDetalles(): string {
-        return `SALA: ${this.nombre} | Capacidad: ${this.capacidad} | Mantenimiento: ${this.mantenimiento || 'N/A'}`;
+        return `SALA: ${this.nombre} | Capacidad: ${this.capacidad} | Horario: ${this.horario_disponible || 'No definido'}`;
     }
 }
