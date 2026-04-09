@@ -238,7 +238,7 @@ Validación de Constraints: Se ajustó manualmente el script de SQL para incluir
 Se descartó una sugerencia de la IA de almacenar el rol en el almacenamiento local (localStorage) para validaciones; decidimos realizar la consulta siempre a la base de datos para evitar vulneraciones de seguridad en el cliente.
 
 ---
-**Entrada 006 — Semana 4**
+## Entrada 006 — Semana 4
 **Fecha: 09/04/2026**
 **Herramienta: Gemini**
 **Responsable: Dev Lead — [Galeano Priscila, Carabajal Valentina]**
@@ -264,7 +264,7 @@ Se descartó el uso de una tabla temporal para el calendario. Optamos por realiz
 
 ---
 
-**Entrada 007 — Semana 4
+## Entrada 007 — Semana 4
 Fecha: 09/04/2026
 Herramienta: Gemini
 Responsable: Dev Lead — [Galeano Priscila, Carabajal Valentina]
