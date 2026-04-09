@@ -1,6 +1,9 @@
 # AI_LOG.md — Registro de uso de herramientas de IA
+
 **Grupo:** Dev Papois
-**Proyecto:** [Nombre del sistema]
+
+**Proyecto:** [Sistema de gestión de coworking]
+
 **Materia:** Ingeniería de Software II · UCP · 2026
 
 ---
@@ -51,11 +54,15 @@ El archivo se revisa en el coloquio del TP1, TP2 e Integrador. Cualquier integra
 ## Entrada 001 — Semana 1
 
 **Fecha:** 19/03/2026
+
 **Herramienta:** Gemini 
+
 **Responsable:** Scrum Master (Agustín Schenone) / QA Lead 
+
 **Eje temático:** Eje 1
 
 **¿Para qué se usó?**
+
 Clarificar las responsabilidades del rol de Scrum Master y de los demás integrantes del equipo para el Sprint 0.
 
 Configurar la estructura técnica del repositorio y las columnas obligatorias del tablero Kanban.
@@ -65,6 +72,7 @@ Redactar el Contrato de Proyecto cumpliendo con la extensión mínima de 5 líne
 Entender el flujo de trabajo colaborativo en GitHub (Pull, Commit, Push) y la gestión de visibilidad de los proyectos.
 
 **¿Qué generó la IA?**
+
 Una guía detallada sobre las obligaciones de gestión (Scrum Master) frente a las técnicas (Dev Lead, QA Lead, UX Lead).
 
 La lista de las 8 tarjetas iniciales requeridas para el Backlog con sus respectivos ejes temáticos y responsables.
@@ -78,6 +86,7 @@ Instrucciones paso a paso para la creación de etiquetas (Labels) y la visibilid
 Nada
 
 **¿Qué modificamos y por qué?**
+
 Se ajustaron los títulos de las tarjetas del tablero para incluir la semana objetivo y el eje programático dentro del texto para mayor claridad visual.
 
 Se validó que el nombre del repositorio respetara el formato estricto de minúsculas y guiones requerido por la guía.
@@ -85,8 +94,11 @@ Se validó que el nombre del repositorio respetara el formato estricto de minús
 Se filtró la información sobre permisos de "Solo lectura" en GitHub para adaptarla a las limitaciones reales de las cuentas personales de los alumnos.
 
 Se verificó que el contenido del contrato reflejara fielmente los acuerdos internos de comunicación (WhatsApp/Discord) definidos por el grupo.
+
 **¿Qué descartamos y por qué?**
+
 Nada
+
 ---
 # Registro de Uso de IA 
 
@@ -105,3 +117,96 @@ Nada
 ### Justificación de uso:
 Se utilizó la IA para acelerar la configuración del entorno de desarrollo y generar el código "boilerplate" (repetitivo), permitiendo al equipo enfocarse en la lógica de negocio y en la arquitectura de los patrones de diseño.
 
+## Entrada 002 — Semana 3
+
+**Fecha:** 02/04/2026
+
+**Herramienta:** ChatGPT
+
+**Responsable:** Dev Lead — [Galeano Priscila, Carabajal Valentina]
+
+**Eje temático:** Eje 1
+
+**¿Para qué se usó?**
+
+Se utilizó la IA para proponer un diseño inicial de base de datos relacional y generar los primeros scripts SQL necesarios para persistir la información del sistema en PostgreSQL.
+
+**¿Qué generó la IA?**
+
+Scripts SQL para la creación de las tablas recursos, usuarios y turnos, incluyendo definición de claves primarias, foráneas y tipos de datos compatibles con PostgreSQL.
+
+**¿Qué aceptamos tal cual?**
+
+La estructura general de las tablas y las relaciones entre usuarios, recursos y turnos mediante claves foráneas.
+
+**¿Qué modificamos y por qué?**
+
+Se agregaron restricciones UNIQUE en los campos DNI y Email de la tabla usuarios para evitar registros duplicados.
+Se ajustaron algunos tipos de datos propuestos por la IA para alinearlos con las reglas de negocio del sistema (por ejemplo, uso de TIMESTAMP para los turnos).
+
+**¿Qué descartamos y por qué?**
+
+Se descartaron valores por defecto sugeridos por la IA que no coincidían con el comportamiento esperado del sistema y podían generar datos inconsistentes.
+
+## Entrada 003 — Semana 3
+
+**Fecha:** 03/04/2026
+
+**Herramienta:** ChatGPT
+
+**Responsable:** Dev Lead — [Galeano Priscila, Carabajal Valentina]
+
+**Eje temático:** Eje 1
+
+**¿Para qué se usó?**
+
+Se utilizó la IA para comprender cómo aplicar el patrón creacional Factory en el sistema, con el objetivo de centralizar la creación de distintos tipos de espacios de trabajo (oficinas, salas de conferencia y puestos individuales).
+
+**¿Qué generó la IA?**
+
+La estructura base de la clase SalaFactory, con métodos encargados de instanciar cada tipo de espacio según sus características.
+
+**¿Qué aceptamos tal cual?**
+
+La idea de centralizar la creación de objetos en una única clase Factory y la estructura general de los métodos de instanciación.
+
+**¿Qué modificamos y por qué?**
+
+Se adaptaron los nombres de clases y métodos a las convenciones del proyecto.
+Se agregó lógica adicional para manejar atributos como capacidad máxima y dimensiones físicas, que la propuesta original no contemplaba.
+Se ajustó la forma en que se reciben los parámetros para que coincidan con el modelo de datos definido previamente.
+
+**¿Qué descartamos y por qué?**
+
+Se descartaron ejemplos genéricos de instanciación que no representaban los tipos de espacios definidos en el sistema y podían generar confusión en la implementación.
+
+## Entrada 4 — Semana 3
+
+**Fecha:** 03/04/2026
+
+**Herramienta:** ChatGPT
+
+**Responsable:** Dev Lead — [Galeano Priscila, Carabajal Valentina]
+
+**Eje temático:** Eje 1
+
+**¿Para qué se usó?**
+
+Se utilizó la IA para configurar correctamente los permisos de acceso a la base de datos desde el frontend y definir políticas de seguridad adecuadas utilizando Supabase.
+
+**¿Qué generó la IA?**
+
+Ejemplos de implementación de políticas RLS (Row Level Security) y habilitación de permisos de lectura y actualización sobre las tablas del sistema.
+
+**¿Qué aceptamos tal cual?**
+
+La estructura base de las políticas RLS propuestas para restringir el acceso a los datos según el usuario autenticado.
+
+**¿Qué modificamos y por qué?**
+
+Se ajustaron las condiciones de las políticas para que coincidan con los roles y reglas del sistema.
+Se corrigieron manualmente los parámetros de conexión del cliente Supabase debido a errores de URL malformada en el entorno local.
+
+**¿Qué descartamos y por qué?**
+
+Se descartaron configuraciones demasiado permisivas sugeridas por la IA que podían comprometer la seguridad de los datos.
