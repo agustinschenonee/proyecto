@@ -3,7 +3,7 @@ import { verificarDisponibilidad } from './ValidadorOcupacion';
 import { supabase } from './supabase';
 
 /**
- * FUNCIÓN 1: ALTA DE SALAS (Tarea #18)
+ * FUNCIÓN 1: ALTA DE SALAS 
  * Exclusivo para administradores.
  */
 async function ejecutarAltaDeSala() {
