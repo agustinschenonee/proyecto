@@ -4,7 +4,6 @@ import { Recurso } from './Recurso';
 
 export class RecursoFactory {
     static crearRecurso(tipo: string, datos: any): Recurso {
-        // Pasamos todo a mayúsculas para que no haya error si viene "sala" o "SALA"
         switch (tipo.toUpperCase()) {
             case 'SALA':
                 return new Sala(
