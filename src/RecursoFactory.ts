@@ -13,7 +13,8 @@ export class RecursoFactory {
                     'SALA', 
                     datos.imagen_url, 
                     datos.mantenimiento,
-                    datos.id
+                    datos.id,
+                    datos.horario_disponible // <--- Pasamos el nuevo dato
                 );
             case 'ESCRITORIO':
                 return new Escritorio(
