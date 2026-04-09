@@ -3,77 +3,46 @@ import { verificarDisponibilidad } from './ValidadorOcupacion';
 import { supabase } from './supabase';
 
 /**
- * FUNCIÓN 1: ALTA DE SALAS 
- * Exclusivo para administradores.
+ * PROCESO DE ALTA 
  */
-async function ejecutarAltaDeSala() {
-    console.log("---  INICIANDO ALTA DE RECURSO ---");
-    
-    const nuevaSala = {
-        nombre: "Sala de Co-Working Misiones",
-        capacidad: 12,
-        mantenimiento: "2026-07-20",
-        horario_disponible: "08:00 a 21:00",
-        imagen_url: "https://images.unsplash.com/photo-workspace"
-    };
-
-    const resultado = await AdminService.crearNuevaSala(nuevaSala);
-
-    if (resultado.success) {
-        console.log("✅ Sala creada con ID:", resultado.sala.id);
-    } else {
-        console.error("❌ No se pudo crear la sala:", resultado.error);
+async function testAltaAdmin() {
+    console.log("\n--- TEST: ALTA DE SALA ---");
+    try {
+        // Suponiendo que el usuario ID 1 es el que hiciste admin en SQL
+        const result = await AdminService.crearNuevaSala(1, {
+            nombre: "Sala Posadas",
+            capacidad: 8,
+            horario_disponible: "09:00 a 18:00"
+        });
+        console.log("✅ Sala creada por admin!");
+    } catch (e: any) {
+        console.error("❌ Error de seguridad:", e.message);
     }
 }
 
 /**
- * FUNCIÓN 2: RESERVA CON VALIDACIÓN 
- * Procesa la lógica de negocio para evitar solapamientos.
+ * PROCESO DE RESERVA 
  */
-async function procesarReservaTurno(uId: number, rId: number, fecha: string, inicio: string, fin: string) {
-    console.log(`--- VALIDANDO DISPONIBILIDAD PARA EL ${fecha} ---`);
+async function testReserva() {
+    console.log("\n--- TEST: RESERVA DE TURNO  ---");
+    const reserva = { uId: 1, rId: 5, fecha: "2026-04-10", inicio: "10:00", fin: "12:00" };
 
-    try {
-        // 1. Verificamos si el horario está libre (Lógica de Lead)
-        const libre = await verificarDisponibilidad(rId, fecha, inicio, fin);
+    const libre = await verificarDisponibilidad(reserva.rId, reserva.fecha, reserva.inicio, reserva.fin);
 
-        if (!libre) {
-            console.warn("🚫 Conflicto de horarios: El recurso ya está reservado.");
-            return;
-        }
-
-        // 2. Si está libre, insertamos el turno (Tarea #12)
-        console.log("✅ Horario libre. Registrando turno en Supabase...");
-        const { data, error } = await supabase
-            .from('turnos')
-            .insert([{ 
-                usuario_id: uId, 
-                recurso_id: rId, 
-                fecha, 
-                hora_inicio: inicio, 
-                hora_fin: fin, 
-                confirmado: true 
-            }])
-            .select();
-
-        if (error) throw error;
-        console.log("✅ Reserva confirmada exitosamente:", data);
-
-    } catch (err: unknown) {
-        const msg = err instanceof Error ? err.message : "Error desconocido";
-        console.error("❌ Fallo crítico en el sistema de turnos:", msg);
+    if (libre) {
+        const { data } = await supabase.from('turnos').insert([{ 
+            usuario_id: reserva.uId, recurso_id: reserva.rId, 
+            fecha: reserva.fecha, hora_inicio: reserva.inicio, 
+            hora_fin: reserva.fin, confirmado: true 
+        }]).select();
+        console.log("✅ Reserva realizada:", data);
+    } else {
+        console.log("🚫 No disponible: Turno ocupado.");
     }
 }
 
-// --- SECCIÓN DE EJECUCIÓN (Simulacro para Testing de QA) ---
-
-async function testSistema() {
-    // Probamos crear una sala primero
-    await ejecutarAltaDeSala();
-
-    // Probamos reservar un turno (Usar un ID de sala existente en tu DB)
-    // Ejemplo: Usuario 1, Sala 5, el 15 de abril, de 10hs a 12hs
-    await procesarReservaTurno(1, 5, "2026-04-15", "10:00", "12:00");
-}
-
-testSistema();
+// Ejecutamos todo
+(async () => {
+    await testAltaAdmin();
+    await testReserva();
+})();
