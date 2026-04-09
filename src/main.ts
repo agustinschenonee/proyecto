@@ -1,46 +1,43 @@
 import { RecursoFactory } from './RecursoFactory';
 import { supabase } from './supabase';
+import { verificarDisponibilidad } from './ValidadorOcupacion';
 
-async function registrarEspacio() {
-    console.log("--- 🏢 INICIANDO CASO DE USO ---");
-
-    const datos = {
-        nombre: "Sala de Conferencias Posadas",
-        capacidad: 20,
-        disponible: true,
-        tipo: 'SALA',
-        mantenimiento: "2026-06-15",
-        horario_disponible: "08:00 a 20:00" 
-    };
+export async function crearReserva(usuarioId: number, recursoId: number, fecha: string, inicio: string, fin: string) {
+    console.log(`--- 🕒 PROCESANDO RESERVA: Recurso ${recursoId} ---`);
 
     try {
-        const miRecurso = RecursoFactory.crearRecurso(datos.tipo, datos);
-        console.log(`> Objeto '${miRecurso.nombre}' generado localmente.`);
+        // 1. VALIDACIÓN DE OCUPACIÓN 
+        const estaLibre = await verificarDisponibilidad(recursoId, fecha, inicio, fin);
 
-        console.log("> Conectando con Supabase...");
-        const { error } = await supabase
-            .from('recursos')
-            .insert([
-                { 
-                    nombre: miRecurso.nombre, 
-                    capacidad: miRecurso.capacidad, 
-                    tipo: datos.tipo,
-                    disponible: miRecurso.disponible,
-                    mantenimiento: datos.mantenimiento,
-                    horario_disponible: datos.horario_disponible // <--- Sincronizado con la DB
-                }
-            ]);
-
-        if (error) {
-            console.error("❌ Error en base de datos:", error.message);
-            return;
+        if (!estaLibre) {
+            console.error("❌ ERROR: El horario seleccionado ya está ocupado.");
+            return { success: false, message: "Horario no disponible" };
         }
 
-        console.log("--- ✅ PROCESO FINALIZADO CON ÉXITO ---");
+        // 2. PERSISTENCIA EN DB
+        const { data, error } = await supabase
+            .from('turnos')
+            .insert([
+                { 
+                    usuario_id: usuarioId, 
+                    recurso_id: recursoId, 
+                    fecha: fecha,
+                    hora_inicio: inicio,
+                    hora_fin: fin,
+                    confirmado: true 
+                }
+            ])
+            .select();
 
-    } catch (err) {
-        console.error("❌ Error inesperado:", err);
+        if (error) throw error;
+
+        console.log("--- ✅ RESERVA CONFIRMADA ---");
+        return { success: true, data };
+
+    } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : "Error desconocido";
+        console.error("❌ FALLO CRÍTICO:", msg);
+        return { success: false, message: msg };
     }
 }
 
-registrarEspacio();
