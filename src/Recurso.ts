@@ -7,5 +7,6 @@ export interface Recurso {
     descripcion?: string;
     disponible: boolean;
     mantenimiento?: string;
+    horario_disponible?: string; // <--- Nuevo
     obtenerDetalles(): string;
 }
