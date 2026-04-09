@@ -1,8 +1,6 @@
-import { RecursoFactory } from './RecursoFactory.ts';
-import { NotificadorEmail } from './Notificadores.ts';
-import { supabase } from './supabase.ts';
+import { RecursoFactory } from './RecursoFactory';
+import { supabase } from './supabase';
 
-// 1. Definimos la función
 async function registrarEspacio() {
     console.log("--- 🏢 INICIANDO CASO DE USO ---");
 
@@ -11,7 +9,8 @@ async function registrarEspacio() {
         capacidad: 20,
         disponible: true,
         tipo: 'SALA',
-        mantenimiento: "2026-06-15" 
+        mantenimiento: "2026-06-15",
+        horario_disponible: "08:00 a 20:00" 
     };
 
     try {
@@ -27,7 +26,8 @@ async function registrarEspacio() {
                     capacidad: miRecurso.capacidad, 
                     tipo: datos.tipo,
                     disponible: miRecurso.disponible,
-                    mantenimiento: datos.mantenimiento 
+                    mantenimiento: datos.mantenimiento,
+                    horario_disponible: datos.horario_disponible // <--- Sincronizado con la DB
                 }
             ]);
 
@@ -36,8 +36,6 @@ async function registrarEspacio() {
             return;
         }
 
-        const notificador = new NotificadorEmail();
-        notificador.actualizar(`El recurso "${miRecurso.nombre}" se registró correctamente.`);
         console.log("--- ✅ PROCESO FINALIZADO CON ÉXITO ---");
 
     } catch (err) {
@@ -45,5 +43,4 @@ async function registrarEspacio() {
     }
 }
 
-// 2. ¡LLAMAMOS A LA FUNCIÓN PARA QUE ARRANQUE!
 registrarEspacio();
