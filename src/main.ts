@@ -7,7 +7,7 @@ import { supabase } from './supabase';
  * Exclusivo para administradores.
  */
 async function ejecutarAltaDeSala() {
-    console.log("--- 🛠️ TAREA #18: INICIANDO ALTA DE RECURSO ---");
+    console.log("---  INICIANDO ALTA DE RECURSO ---");
     
     const nuevaSala = {
         nombre: "Sala de Co-Working Misiones",
@@ -31,7 +31,7 @@ async function ejecutarAltaDeSala() {
  * Procesa la lógica de negocio para evitar solapamientos.
  */
 async function procesarReservaTurno(uId: number, rId: number, fecha: string, inicio: string, fin: string) {
-    console.log(`--- 🕒 TAREA #20: VALIDANDO DISPONIBILIDAD PARA EL ${fecha} ---`);
+    console.log(`--- VALIDANDO DISPONIBILIDAD PARA EL ${fecha} ---`);
 
     try {
         // 1. Verificamos si el horario está libre (Lógica de Lead)
