@@ -262,7 +262,7 @@ La lógica matemática para detectar traslapes: (inicioA < finB) && (finA > inic
 **¿Qué descartamos y por qué?**
 Se descartó el uso de una tabla temporal para el calendario. Optamos por realizar consultas dinámicas filtradas por fecha directamente sobre la tabla turnos para mantener la base de datos normalizada y con datos en tiempo real.
 
---
+---
 
 **Entrada 007 — Semana 4
 Fecha: 09/04/2026
