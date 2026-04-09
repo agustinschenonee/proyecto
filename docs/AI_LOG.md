@@ -236,3 +236,54 @@ Validación de Constraints: Se ajustó manualmente el script de SQL para incluir
 
 **¿Qué descartamos y por qué?**
 Se descartó una sugerencia de la IA de almacenar el rol en el almacenamiento local (localStorage) para validaciones; decidimos realizar la consulta siempre a la base de datos para evitar vulneraciones de seguridad en el cliente.
+
+---
+**Entrada 006 — Semana 4**
+**Fecha: 09/04/2026**
+**Herramienta: Gemini**
+**Responsable: Dev Lead — [Galeano Priscila, Carabajal Valentina]**
+**Eje temático: Eje 2**
+
+**¿Para qué se usó?**
+Desarrollar el motor de validación de disponibilidad (Tarea #20) y el sistema de gestión de turnos y calendarios (Tarea #12).
+
+**¿Qué generó la IA?**
+El algoritmo de detección de solapamiento de rangos horarios y la estructura del archivo TurnoService.ts para gestionar la persistencia de reservas.
+
+**¿Qué aceptamos tal cual?**
+La lógica matemática para detectar traslapes: (inicioA < finB) && (finA > inicioB).
+
+**¿Qué modificamos y por qué?**
+
+*Optimización de consultas:* Se modificó la función de obtención de calendario para incluir un select relacional que traiga el nombre del usuario desde la tabla vinculada, permitiendo una visualización más clara en el "Calendario".
+
+*Encapsulamiento de lógica:* Se movió la validación de disponibilidad dentro del método de reserva del TurnoService, asegurando que no se pueda persistir un turno sin haber pasado el control de ocupación.
+
+**¿Qué descartamos y por qué?**
+Se descartó el uso de una tabla temporal para el calendario. Optamos por realizar consultas dinámicas filtradas por fecha directamente sobre la tabla turnos para mantener la base de datos normalizada y con datos en tiempo real.
+
+--
+
+**Entrada 007 — Semana 4
+Fecha: 09/04/2026
+Herramienta: Gemini
+Responsable: Dev Lead — [Galeano Priscila, Carabajal Valentina]
+Eje temático: Eje 2**
+
+**¿Para qué se usó?**
+Consolidar todas las tareas del sprint en un punto de entrada único (Main.ts) para simular el flujo completo del sistema.
+
+**¿Qué generó la IA?**
+Una propuesta de archivo Main.ts con funciones asíncronas para testear la creación de salas y la reserva de turnos de forma secuencial.
+
+**¿Qué aceptamos tal cual?**
+La estructura de la función autoejecutable (bootstrap) para iniciar las pruebas del sistema en la consola.
+
+**¿Qué modificamos y por qué?**
+
+*Orquestación de Servicios:* Se reemplazó la lógica directa de Supabase por llamadas a los servicios creados (AdminService, TurnoService), aplicando el principio de abstracción.
+
+*Logs de Trazabilidad:* Se agregaron etiquetas de consola con los números de tarea (#12, #17, #18, #20) para facilitar la auditoría y corrección por parte de los docentes.
+
+**¿Qué descartamos y por qué?**
+Se descartaron las credenciales de Supabase hardcodeadas que propuso la IA originalmente, utilizando en su lugar la instancia centralizada en el archivo de configuración del proyecto.
