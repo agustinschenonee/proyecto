@@ -180,7 +180,7 @@ Se ajustó la forma en que se reciben los parámetros para que coincidan con el 
 
 Se descartaron ejemplos genéricos de instanciación que no representaban los tipos de espacios definidos en el sistema y podían generar confusión en la implementación.
 
-## Entrada 4 — Semana 3
+## Entrada 004 — Semana 3
 
 **Fecha:** 03/04/2026
 
@@ -210,3 +210,27 @@ Se corrigieron manualmente los parámetros de conexión del cliente Supabase deb
 **¿Qué descartamos y por qué?**
 
 Se descartaron configuraciones demasiado permisivas sugeridas por la IA que podían comprometer la seguridad de los datos.
+
+Entrada 005 — Semana 4
+Fecha: 09/04/2026
+Herramienta: Gemini
+Responsable: Dev Lead — [Carabajal Valentina]
+Eje temático: Eje 2 / Eje 3
+
+¿Para qué se usó?
+Implementar la seguridad por roles (Tarea #17) y el módulo de alta de salas para administradores (Tarea #18) integrando la lógica con Supabase.
+
+¿Qué generó la IA?
+Estructura de los servicios AuthService.ts y AdminService.ts, junto con scripts SQL para la creación de la columna de roles y restricciones (constraints) de integridad.
+
+¿Qué aceptamos tal cual?
+El script SQL para añadir la columna rol con valor por defecto 'usuario' y la lógica de validación booleana en el servicio de autenticación.
+
+¿Qué modificamos y por qué?
+
+Integración con Factory: Se modificó el AdminService para que la creación de objetos no sea directa, sino que invoque obligatoriamente a la RecursoFactory desarrollada en la semana 3, manteniendo la consistencia de los patrones de diseño.
+
+Validación de Constraints: Se ajustó manualmente el script de SQL para incluir una restricción CHECK, garantizando que la base de datos solo acepte los strings 'admin' o 'usuario'.
+
+¿Qué descartamos y por qué?
+Se descartó una sugerencia de la IA de almacenar el rol en el almacenamiento local (localStorage) para validaciones; decidimos realizar la consulta siempre a la base de datos para evitar vulneraciones de seguridad en el cliente.
