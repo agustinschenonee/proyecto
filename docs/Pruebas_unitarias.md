@@ -35,7 +35,8 @@ Es una alternativa moderna y extremadamente rápida diseñada para proyectos con
     2. **AuthService** (Servicio de autenticación).
 * **Uso de Mocks/Stubs:** Utilizaremos Stubs para simular la respuesta de Supabase. Esto aisla el componente para probar si la lógica de negocio reacciona bien ante un éxito o un error de la base de datos sin conectarse a internet.
 
-* ### 3. Pruebas de Componentes y de Sistema
+
+* ### III. Pruebas de Componentes y de Sistema
 
 * **Componente Significativo:**
     Elegimos el **Motor de Reservas (`TurnoService.ts`)**. Este componente es una pieza clave que coordina la validación de disponibilidad (a través del `ValidadorOcupacion`), la creación del objeto mediante `RecursoFactory` y la ejecución de la lógica de guardado.
@@ -56,9 +57,9 @@ Es una alternativa moderna y extremadamente rápida diseñada para proyectos con
     * **Cypress:** Ofrece una experiencia de desarrollo superior con recarga instantánea y una interfaz visual clara.
     * **Elección:** **Cypress**. Lo elegimos por su facilidad para integrarse con aplicaciones web modernas y porque permite a nuestro equipo de UX validar la claridad del flujo mientras se ejecutan las pruebas.
 
----
 
-### 4. Pruebas de Regresión y de Estrés
+
+### IV. Pruebas de Regresión y de Estrés
 
 * **Estrategia de Regresión:**
     Ante cada cambio en el código, ejecutaremos automáticamente el conjunto total de pruebas unitarias e integración.
