@@ -14,10 +14,11 @@ El sistema falla al asignar el rol de usuario y administrador dándole privilegi
 
 
 ## Investigación
-¿Qué es una prueba unitaria?
+1.¿Qué es una prueba unitaria?
 En términos sencillos, una prueba unitaria consiste en aislar la pieza más pequeña de código que sea lógica (función o un método) y verificar que se comporte como esperamos. El objetivo principal es asegurarnos de que, ante una entrada específica, el resultado sea el correcto, sin que intervengan otros elementos del sistema como bases de datos o APIs externas. Esto nos permite detectar errores de forma temprana y facilitar el mantenimiento del código a largo plazo.
 
-2. Herramientas para TypeScript
+
+2.Herramientas para TypeScript
 Para el ecosistema de TypeScript, existen varias opciones sólidas que se integran muy bien con el tipado estático:
 
 Jest: Es la herramienta más popular. Es robusta, incluye todo lo necesario (test runner, aserciones y mocks) en un solo paquete y tiene una integración excelente con TypeScript a través de ts-jest.
@@ -25,13 +26,14 @@ Jest: Es la herramienta más popular. Es robusta, incluye todo lo necesario (tes
 Vitest: Una alternativa moderna y extremadamente rápida, diseñada para proyectos que utilizan Vite. Es compatible con la API de Jest, lo que facilita mucho la migración entre ambos.
 
 Mocha: Un framework más clásico y flexible que permite elegir qué biblioteca de aserciones usar aunque requiere un poco más de configuración inicial.
+
  
 3. Ejemplo de un test simple
 
 Para escribir un test básico, primero necesitamos la lógica a probar y luego el archivo de prueba que verifique su funcionamiento. En este caso, utilizaremos una sintaxis estándar compatible con Jest o Vitest.
 
 Archivo de lógica (math.ts): 
-
+´´´TypeScript
 export const sumar = (a: number, b: number): number => {
   return a + b;
 };
