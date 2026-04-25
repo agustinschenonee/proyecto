@@ -35,6 +35,15 @@ Es una alternativa moderna y extremadamente rápida diseñada para proyectos con
     2. **AuthService** (Servicio de autenticación).
 * **Uso de Mocks/Stubs:** Utilizaremos Stubs para simular la respuesta de Supabase. Esto aisla el componente para probar si la lógica de negocio reacciona bien ante un éxito o un error de la base de datos sin conectarse a internet.
 
+* 
+| Nivel de prueba | Herramienta elegida | ¿Qué automatiza en su proyecto? | Justificación (por qué es la mejor opción gratuita) |
+| :--- | :--- | :--- | :--- |
+| **Unitarias** | **Vitest** | Valida funciones de lógica pura, como el `ValidadorOcupacion.ts` y el cálculo de costos. | Es extremadamente rápido y detecta automáticamente la configuración de TypeScript de nuestro repositorio sin herramientas extra. |
+| **Integración** | **Vitest** | Simula la comunicación entre los servicios (`TurnoService.ts`) y la base de datos de Supabase usando Mocks. | Permite aislar el código sin depender de una conexión a internet, siendo más ligero y práctico que configurar servidores externos. |
+| **Sistema / E2E** | **Cypress** | Simula el recorrido completo del usuario: Login, búsqueda de espacio y confirmación de la reserva en el navegador. | Ofrece una interfaz visual gratuita que permite ver fallos en tiempo real, facilitando la validación de la experiencia de usuario (UX). |
+| **Estrés** | **k6** | Simula la carga masiva de 500+ usuarios intentando reservar un coworking al mismo tiempo. | Los scripts se escriben en JavaScript, lo que permite que cualquier miembro del equipo pueda crearlos sin aprender un nuevo lenguaje. |
+
+
 **Ejemplo (Pseudocódigo):**
 ```typescript
 // Reemplazamos el guardado real por uno simulado (Stub)
@@ -48,9 +57,3 @@ expect(Notificadores.enviarEmail).toHaveBeenCalled();
 
 ### Cuadro Comparativo: Stack Definitivo de Automatización
 
-| Nivel de prueba | Herramienta elegida | ¿Qué automatiza en su proyecto? | Justificación (por qué es la mejor opción gratuita) |
-| :--- | :--- | :--- | :--- |
-| **Unitarias** | **Vitest** | Valida funciones de lógica pura, como el `ValidadorOcupacion.ts` y el cálculo de costos. | Es extremadamente rápido y detecta automáticamente la configuración de TypeScript de nuestro repositorio sin herramientas extra. |
-| **Integración** | **Vitest** | Simula la comunicación entre los servicios (`TurnoService.ts`) y la base de datos de Supabase usando Mocks. | Permite aislar el código sin depender de una conexión a internet, siendo más ligero y práctico que configurar servidores externos. |
-| **Sistema / E2E** | **Cypress** | Simula el recorrido completo del usuario: Login, búsqueda de espacio y confirmación de la reserva en el navegador. | Ofrece una interfaz visual gratuita que permite ver fallos en tiempo real, facilitando la validación de la experiencia de usuario (UX). |
-| **Estrés** | **k6** | Simula la carga masiva de 500+ usuarios intentando reservar un coworking al mismo tiempo. | Los scripts se escriben en JavaScript, lo que permite que cualquier miembro del equipo pueda crearlos sin aprender un nuevo lenguaje. |
