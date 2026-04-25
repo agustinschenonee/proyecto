@@ -13,7 +13,8 @@ El sistema puede mostrar como disponibles salas que están ocupadas en la base d
 El sistema falla al asignar el rol de usuario y administrador dándole privilegios inconsistentes con el rol habitual, por ejemplo el poder ver y modificar las reservas de otros usuarios e incluso crear y eliminar salas. Esto podría alteraría por completo el funcionamiento del sistema
 
 
-1. ¿Qué es una prueba unitaria?
+## Investigación
+¿Qué es una prueba unitaria?
 En términos sencillos, una prueba unitaria consiste en aislar la pieza más pequeña de código que sea lógica (función o un método) y verificar que se comporte como esperamos. El objetivo principal es asegurarnos de que, ante una entrada específica, el resultado sea el correcto, sin que intervengan otros elementos del sistema como bases de datos o APIs externas. Esto nos permite detectar errores de forma temprana y facilitar el mantenimiento del código a largo plazo.
 
 2. Herramientas para TypeScript
