@@ -33,7 +33,9 @@ Mocha: Un framework más clásico y flexible que permite elegir qué biblioteca 
 Para escribir un test básico, primero necesitamos la lógica a probar y luego el archivo de prueba que verifique su funcionamiento. En este caso, utilizaremos una sintaxis estándar compatible con Jest o Vitest.
 
 Archivo de lógica (math.ts): 
+
 ´´´TypeScript
+
 export const sumar = (a: number, b: number): number => {
   return a + b;
 };
@@ -44,6 +46,7 @@ import { sumar } from './math';
 
 describe('Pruebas en el módulo math', () => {
   test('la función sumar debería retornar 5 al recibir 2 y 3', () => {
+  
     // 1. Definimos los datos de entrada
     const num1 = 2;
     const num2 = 3;
