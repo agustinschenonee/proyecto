@@ -46,12 +46,12 @@ Es una alternativa moderna y extremadamente rápida diseñada para proyectos con
     * **Salidas esperadas:** La creación de un registro de turno válido y la activación del patrón *Observer* para notificar a los interesados.
     * **Entorno necesario:** Se requiere un entorno de pruebas con una instancia de Supabase (o un simulador) que contenga datos de espacios previamente cargados para validar los cruces de horarios.
 
-* **Prueba de Sistema: Flujo Completo (Camino Feliz):**
+* **Prueba de Sistema: Flujo Completo:**
     1.  **Ingreso:** El usuario se autentica exitosamente. **Validación:** Redirección al panel de control con el rol asignado.
     2.  **Selección:** El usuario filtra espacios por "Sala de reuniones" y elige un horario libre. **Validación:** El sistema responde con la disponibilidad en tiempo real.
     3.  **Reserva:** El usuario confirma la operación. **Validación:** Se genera el turno, el espacio cambia su estado a "Ocupado" para otros usuarios y se emite la notificación correspondiente.
 
-* **Herramientas End-to-End (E2E):**
+* **Herramientas End-to-End:**
     * **Selenium:** Es la herramienta más antigua; permite mucha compatibilidad pero es lenta y difícil de configurar.
     * **Playwright:** Es muy rápido y moderno, ideal para pruebas en múltiples navegadores.
     * **Cypress:** Ofrece una experiencia de desarrollo superior con recarga instantánea y una interfaz visual clara.
@@ -66,7 +66,7 @@ Es una alternativa moderna y extremadamente rápida diseñada para proyectos con
     * **Integración CI/CD:** Configuraremos un flujo en **GitHub Actions** que se dispare con cada *Push* o *Pull Request*. Si los tests no pasan (por ejemplo, si una mejora en el sistema de usuarios rompe el motor de reservas), el código no podrá integrarse a la rama principal.
 
 * **Escenario de Estrés:**
-    Planteamos una situación de carga extrema real: **1000 solicitudes de turno en el primer minuto de habilitación** de la agenda (lunes a las 08:00 AM), simulando el pico de demanda de alumnos buscando asegurar su lugar para la semana.
+    Planteamos una situación de carga extrema real: **1000 solicitudes de turno en el primer minuto de habilitación** de la agenda (lunes a las 08:00 AM), simulando el pico de demanda.
 
 * **Herramientas de Estrés:**
     * **JMeter:** Es muy potente pero su interfaz basada en Java es compleja de mantener.
