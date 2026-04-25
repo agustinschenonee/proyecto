@@ -1,6 +1,6 @@
 # Estrategia de Pruebas y Calidad - GRUPO DEVpapois
 
-##Las 3 situaciones críticas del sistema de coworking:
+## Las 3 situaciones críticas del sistema de coworking:
 
 1: Colisión de reservas:
 El sistema falla cuando 2 usuarios hacen una reserva del mismo espacio en el mismo horario y fecha.
